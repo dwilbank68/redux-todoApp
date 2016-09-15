@@ -1,14 +1,18 @@
-import React, {
-    PropTypes,
-} from 'react';
+import React from 'react';
+var {connect} = require('react-redux');
+//import actions from '../actions/actions.jsx';
+var actions = require('actions');
+console.log('actions', actions);
 
-const AddTodo = React.createClass({
+export var AddTodo = React.createClass({
 
     handleSubmit(e){
         e.preventDefault();
+        var {dispatch} = this.props;
         var text = this.refs.task.value;
+
         if (text.length > 0) {
-            this.props.onAddTodo(text);
+            dispatch(actions.addTodo(text));
             this.refs.task.value = '';
         } else {
             this.refs.task.focus();
@@ -18,12 +22,12 @@ const AddTodo = React.createClass({
     render() {
         return (
             <div className="container__footer">
-                <form   ref="form"
-                        onSubmit={this.handleSubmit}
-                        className="add-todo-form">
-                    <input  type="text"
-                            ref="task"
-                            placeholder="What do you need to do?"/>
+                <form ref="form"
+                      onSubmit={this.handleSubmit}
+                      className="add-todo-form">
+                    <input type="text"
+                           ref="task"
+                           placeholder="What do you need to do?"/>
                     <button className="button expanded">
                         Add Todo
                     </button>
@@ -35,4 +39,4 @@ const AddTodo = React.createClass({
     }
 });
 
-export default AddTodo;
+export default connect()(AddTodo);

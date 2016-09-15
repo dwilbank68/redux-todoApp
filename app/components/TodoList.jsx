@@ -3,7 +3,7 @@ var {connect} = require('react-redux');
 import Todo from 'Todo';
 
 
-const TodoList = React.createClass({
+export var TodoList = React.createClass({
     render() {
         return (
             <div>
@@ -32,7 +32,7 @@ const TodoList = React.createClass({
 
 });
 
-module.exports = connect(
+export default connect(
     (state)=>{
         return {  todos: state.todos  }
     }

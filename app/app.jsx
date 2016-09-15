@@ -8,10 +8,7 @@ import TodoApp from 'TodoApp';
 //import actions from 'actions';
 var actions = require('actions');
 
-console.log('actions', actions);
-
-
-var store = require('configureStore').configure();
+var store = require('./store/configureStore').configure();
 
 store.subscribe(()=>{
     console.log('state', store.getState());
