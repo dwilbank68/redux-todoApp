@@ -21,8 +21,8 @@ describe('TodoList', ()=> {
                     completedAt:undefined, createdAt:500},
             {id: 2, text: 'clearn yard', completed:false,
                     completedAt:undefined, createdAt:600},
-            {id: 3, text: 'nothing', completed:true,
-                    completedAt:8787, createdAt:200},
+            {id: 3, text: 'nothing', completed:false,
+                    completedAt:undefined, createdAt:200},
             {id: 4, text: 'bleehhhh', completed:false,
                     completedAt:undefined, createdAt:100},
         ];
