@@ -7,7 +7,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 try {
     envFile(path.join(__dirname, 'config/' + process.env.NODE_ENV + '.env'));
 } catch (e) {
-    // here because in production, config folder will not exist
+
 }
 
 module.exports = {
@@ -22,11 +22,11 @@ module.exports = {
     plugins: [
         new webpack.ProvidePlugin({
             '$': 'jquery',
-            'jQuery':'jquery'
+            'jQuery': 'jquery'
         }),
         new webpack.optimize.UglifyJsPlugin({
-            compressor: {
-                warnings:false
+            compress: {
+                warnings: false
             }
         }),
         new webpack.DefinePlugin({
@@ -47,8 +47,8 @@ module.exports = {
         root: __dirname,
         modulesDirectories: [
             'node_modules',
-            './app/api',
-            './app/components'
+            './app/components',
+            './app/api'
         ],
         alias: {
             app: 'app',
@@ -57,14 +57,14 @@ module.exports = {
             reducers: 'app/reducers/reducers.jsx',
             configureStore: 'app/store/configureStore.jsx'
         },
-        extensions: ['','.js','.jsx']
+        extensions: ['', '.js', '.jsx']
     },
     module: {
         loaders: [
             {
                 loader: 'babel-loader',
                 query: {
-                    presets: ['react','es2015', 'stage-0']
+                    presets: ['react', 'es2015', 'stage-0']
                 },
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/
@@ -72,9 +72,9 @@ module.exports = {
         ]
     },
     sassLoader: {
-      includePaths:[
-          path.resolve(__dirname, './node_modules/foundation-sites/scss')
-      ]
+        includePaths: [
+            path.resolve(__dirname, './node_modules/foundation-sites/scss')
+        ]
     },
     devtool: process.env.NODE_ENV === 'production' ? undefined : 'inline-source-map'
-}
+};

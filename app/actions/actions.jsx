@@ -8,7 +8,7 @@ export var setSearchText = (searchText)=>{
     }
 }
 
-//////////////////////////////////////////
+////////////////////// ADD_TODOS ////////////////////
 
 export var startAddTodos = ()=>{
     return (dispatch, getState) =>{
@@ -51,8 +51,9 @@ export var startAddTodo = (text)=>{
             createdAt: moment().unix(),
             completedAt: null
         }
-        var todoRef = firebaseRef.child('todos')
-                                    .push(todo);
+        var todoRef = firebaseRef
+                            .child('todos')
+                            .push(todo);
 
         return todoRef.then(()=>{
             dispatch(addTodo({
@@ -70,7 +71,7 @@ export var addTodo = (todo)=>{
     }
 }
 
-///////////// TOGGLE_TODO //////////////////
+///////////// UPDATE_TODO //////////////////
 
 export var startToggleTodo = (id, completed)=>{
     return (dispatch, getState) => {
@@ -98,7 +99,7 @@ export var updateTodo = (id, updates)=>{
     }
 }
 
-////////////////////////////////////////////
+///////////////////// TOGGLE_SHOW_COMPLETED ///////////////////////
 
 export var toggleShowCompleted = ()=>{
     return {
