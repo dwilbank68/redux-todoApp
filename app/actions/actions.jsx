@@ -12,7 +12,8 @@ export var setSearchText = (searchText)=>{
 
 export var startAddTodos = ()=>{
     return (dispatch, getState) =>{
-        var todosRef = firebaseRef.child('todos');
+        var uid = getState().auth.uid;
+        var todosRef = firebaseRef.child('users/' +uid+ '/todos');
         return todosRef.once('value')
                 .then((snapshot)=>{
                         var todosObj = snapshot.val() || {};
@@ -51,8 +52,9 @@ export var startAddTodo = (text)=>{
             createdAt: moment().unix(),
             completedAt: null
         }
+        var uid = getState().auth.uid;
         var todoRef = firebaseRef
-                            .child('todos')
+                            .child('users/' +uid+ '/todos')
                             .push(todo);
 
         return todoRef.then(()=>{
@@ -80,7 +82,8 @@ export var startLogin = ()=>{
                     .signInWithPopup(githubProvider)
                     .then(
                         (result)=>{
-                           console.log('Auth ', result);
+                            console.log('Auth ', result);
+                            //dispatch(login(result.user.uid));
                         },
                         (error)=>{
                             console.log('Unable to auth', error);
@@ -89,6 +92,14 @@ export var startLogin = ()=>{
     }
 }
 
+export var login = (uid)=>{
+    return {
+        type: 'LOGIN',
+        uid: uid
+    }
+}
+
+
 export var startLogout = ()=>{
     return (dispatch, getState) => {
         return firebase
@@ -96,17 +107,20 @@ export var startLogout = ()=>{
                     .signOut()
                     .then(()=>{
                         console.log('Logged Out');
+                        //dispatch(logout());
                     })
     }
 }
 
-
+export var logout = ()=>{
+    return { type: 'LOGOUT' }
+}
 ///////////// UPDATE_TODO //////////////////
 
 export var startToggleTodo = (id, completed)=>{
     return (dispatch, getState) => {
-
-        var todoRef = firebaseRef.child('todos/'+id);
+        var uid = getState().auth.uid;
+        var todoRef = firebaseRef.child('users/' +uid+ '/todos/' +id);
         var updates = {
             completed,
             completedAt: completed ? moment().unix() : null
@@ -121,7 +135,6 @@ export var startToggleTodo = (id, completed)=>{
 }
 
 export var updateTodo = (id, updates)=>{
-
     return {
         type: 'UPDATE_TODO',
         id,

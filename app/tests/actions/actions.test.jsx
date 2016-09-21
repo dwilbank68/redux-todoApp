@@ -152,4 +152,23 @@ describe('Actions', () => {
         });
 
     });
+
+    describe('Login and Logout Actions', () => {
+        it('should generate LOGIN action', () => {
+            const action = {
+                type: 'LOGIN',
+                uid: 123456789
+            };
+            const res = actions.login( action.uid );
+            expect(res).toEqual(action);
+        });
+        it('should generate LOGOUT action', () => {
+            var action = {
+                type: 'LOGOUT'
+            }
+            var res = actions.logout();
+            expect(res).toEqual(action);
+        });
+    });
+
 });
