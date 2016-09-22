@@ -31,6 +31,7 @@ describe('Reducers', () => {
             var res = reducers.authReducer(df(authData), df(action));
             expect(res).toEqual({})
         });
+
     });
 
     describe('showCompletedReducer', () => {
@@ -101,6 +102,20 @@ describe('Reducers', () => {
             expect(res[0].completedAt).toEqual(updates.completedAt);
             expect(res[0].text).toEqual(todos[0].text);
         });
+
+        it('should wipe todos on LOGOUT', () => {
+            var todos = [{
+                id:456,
+                text:'bleeghh',
+                completed:false,
+                createdAt: 9876987698,
+                completedAt: undefined
+            }];
+            const action = { type: 'LOGOUT' };
+            var res = reducers.todosReducer(df(todos), df(action));
+            expect(res).toEqual([]);
+        });
+
     });
 
 });

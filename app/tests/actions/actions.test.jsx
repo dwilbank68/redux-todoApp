@@ -74,6 +74,7 @@ describe('Actions', () => {
         expect(res).toEqual(action);
     });
 
+
     describe('Tests with firebase todos', () => {
         var testTodoRef;
         var uid;
@@ -81,9 +82,6 @@ describe('Actions', () => {
 
         beforeEach((done)=> {
             var token = process.env.GITHUB_ACCESS_TOKEN;
-            console.log('token', token);
-            console.log('process.env', process.env);
-
             var credential = firebase
                                 .auth
                                 .GithubAuthProvider
