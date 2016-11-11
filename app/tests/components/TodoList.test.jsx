@@ -27,7 +27,7 @@ describe('TodoList', ()=> {
                     completedAt:undefined, createdAt:100},
         ];
 
-        var store = configure({  todos: todos });
+        var store = configure({ todos });
 
         var provider = TestUtils.renderIntoDocument(
             <Provider store={store}>

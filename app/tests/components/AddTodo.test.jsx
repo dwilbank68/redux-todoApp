@@ -20,9 +20,9 @@ describe('AddTodo', ()=> {
         var action = actions.startAddTodo(todoText);
         var spy = expect.createSpy();
         var addTodo = TestUtils
-            .renderIntoDocument(
-                <AddTodo dispatch={spy}/>
-            );
+                            .renderIntoDocument(
+                                <AddTodo dispatch={spy}/>
+                            );
         var $el = $(ReactDOM.findDOMNode(addTodo));
         addTodo.refs.task.value = todoText;
         TestUtils.Simulate.submit($el.find('form')[0]);
@@ -31,12 +31,12 @@ describe('AddTodo', ()=> {
 
     it('should not dispatch ADD_TODO when invalid todo text', () => {
         var spy = expect.createSpy();
-        var todoForm = TestUtils
-            .renderIntoDocument(
-                <AddTodo dispatch={spy}/>
-            );
-        var $el = $(ReactDOM.findDOMNode(todoForm));
-        todoForm.refs.task.value = '';
+        var addTodo = TestUtils
+                            .renderIntoDocument(
+                                <AddTodo dispatch={spy}/>
+                            );
+        var $el = $(ReactDOM.findDOMNode(addTodo));
+        addTodo.refs.task.value = '';
         TestUtils.Simulate.submit($el.find('form')[0]);
         expect(spy).toNotHaveBeenCalled();
     });

@@ -1,4 +1,4 @@
-var React = require('react');
+ var React = require('react');
 var ReactDOM = require('react-dom');
 var expect = require('expect');
 var $ = require('jQuery');
@@ -18,7 +18,8 @@ describe('TodoSearch', ()=> {
             type: 'SET_SEARCH_TEXT',
             searchText:'do this test'
         }
-        var todoSearch = TestUtils.renderIntoDocument(
+        var todoSearch = TestUtils
+                                .renderIntoDocument(
                                         <TodoSearch dispatch={spy}/>
                                 );
         todoSearch.refs.searchText.value = 'do this test';
@@ -31,7 +32,8 @@ describe('TodoSearch', ()=> {
             type: 'TOGGLE_SHOW_COMPLETED'
         };
         var spy = expect.createSpy();
-        var todoSearch = TestUtils.renderIntoDocument(
+        var todoSearch = TestUtils
+                                .renderIntoDocument(
                                     <TodoSearch dispatch={spy}/>
                                 );
         todoSearch.refs.showCompleted.checked = true;

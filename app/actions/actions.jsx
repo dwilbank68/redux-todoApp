@@ -14,8 +14,10 @@ export var startAddTodos = ()=>{
     return (dispatch, getState) =>{
         var uid = getState().auth.uid;
         var todosRef = firebaseRef.child('users/' +uid+ '/todos');
-        return todosRef.once('value')
-                .then((snapshot)=>{
+        return todosRef
+                .once('value')
+                .then(
+                    (snapshot)=>{
                         var todosObj = snapshot.val() || {};
                         var keys = Object.keys(todosObj);
                         var todos = keys.map((key)=>{
@@ -45,24 +47,22 @@ export var addTodos = (todos)=>{
 
 export var startAddTodo = (text)=>{
     return (dispatch, getState)=>{
-
         var todo = {
             text: text,
-            completed: false,
             createdAt: moment().unix(),
-            completedAt: null
+            completed: false, completedAt: null
         }
         var uid = getState().auth.uid;
         var todoRef = firebaseRef
                             .child('users/' +uid+ '/todos')
                             .push(todo);
 
-        return todoRef.then(()=>{
-            dispatch(addTodo({
-                ...todo, id:todoRef.key
-            }));
-        })
-
+        return todoRef
+                    .then(() => {
+                        dispatch(addTodo({
+                            ...todo, id:todoRef.key
+                        }));
+                    })
     }
 }
 

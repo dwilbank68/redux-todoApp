@@ -1,23 +1,24 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
+
 var {connect} = require('react-redux');
 import Todo from 'Todo';
 var TodoAPI = require('TodoAPI');
 
-export var TodoList = React.createClass({
+export class TodoList extends Component {
+
     render() {
         return (
             <div>
                 {this.renderTodos()}
             </div>
         );
-    },
+    }
 
     renderTodos(){
         var {todos, showCompleted, searchText} = this.props;
 
         var filteredTodos = TodoAPI
             .filterTodos(todos, showCompleted, searchText);
-
 
         if (filteredTodos.length === 0) {
             return (
@@ -35,8 +36,11 @@ export var TodoList = React.createClass({
 
     }
 
-});
+}
+
+TodoList.propTypes = {};
+TodoList.defaultProps = {};
 
 export default connect(
-    (state)=>{ return state; }
+    state  => { return state; }
 )(TodoList);
